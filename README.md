@@ -7,6 +7,7 @@ The platform is securely authenticated and authorized using Clerk and solves a r
 👉 People want to invest, but don’t know where, how, or whom to trust.
 
 Instead of generic advice, this app delivers goal-oriented, customized, AI-driven investment recommendations — completely free.
+
 DEMO-
 https://www.loom.com/share/1ecfc9239cff4e03bcc524c8f4bff176
 
