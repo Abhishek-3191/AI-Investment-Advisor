@@ -34,7 +34,7 @@ export default async function Home() {
               </span>
             </h1>
 
-            <p className="max-w-xl text-sm md:text-base text-white/70">
+            <p className="max-w-xl text-sm md:text-base text-black/70">
               Plan goals, understand risks, and explore investment options using a
               voice-first AI assistant — built for modern investors.
             </p>
