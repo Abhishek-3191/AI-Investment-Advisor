@@ -18,11 +18,9 @@ export const saveChat = mutation({
 })
 
 export const getUserChats = query({
-  args: {
-    email: v.string(),
-  },
+  args: { email: v.string() },
   handler: async (ctx, args) => {
-    return await ctx.db
+    return ctx.db
       .query("chats")
       .filter(q => q.eq(q.field("email"), args.email))
       .order("asc")
