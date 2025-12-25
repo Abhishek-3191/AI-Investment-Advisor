@@ -3,6 +3,7 @@
 A fully voice-enabled AI Investment Advisor that listens to users, understands their financial needs, and speaks back with personalized investment advice.
 
 The platform is securely authenticated and authorized using Clerk and solves a real-world problem:
+
 👉 People want to invest, but don’t know where, how, or whom to trust.
 
 Instead of generic advice, this app delivers goal-oriented, customized, AI-driven investment recommendations — completely free.
@@ -10,15 +11,26 @@ Instead of generic advice, this app delivers goal-oriented, customized, AI-drive
 🎯 What Makes This App Unique?
 
 ✅ Full Voice-to-Voice AI (No typing required)
-✅ Authenticated & authorized users only
-✅ Personalized investment strategies
-✅ Compares Stocks, Mutual Funds, Gold, Silver & more
-✅ Beginner-friendly + Advanced user support
-✅ Real conversational financial advisor experience
+
+🔐 Authenticated & authorized users only
+
+🎯 Personalized investment strategies
+
+📊 Compares multiple assets
+
+Stocks
+
+Mutual Funds
+
+Gold & Silver
+
+🧑‍🎓 Beginner-friendly + Advanced user support
+
+🗣️ Real conversational AI financial advisor experience
 
 🌍 Real-World Problem It Solves
 
-Most investors:
+Most investors today:
 
 ❌ Don’t understand financial terms
 
@@ -26,19 +38,25 @@ Most investors:
 
 ❌ Cannot compare multiple investment options
 
-❌ Are afraid of making wrong decisions
+❌ Are afraid of making wrong investment decisions
 
 💡 Solution
 
-This app acts like a real AI financial advisor:
+This app behaves like a real AI financial advisor:
 
-Users talk naturally
+🗣️ Users talk naturally
 
-AI asks intelligent follow-up questions
+🧠 AI asks intelligent follow-up questions
 
-AI analyzes goals, risk, and duration
+📈 AI analyzes:
 
-AI speaks back with clear, structured advice
+Goals
+
+Risk appetite
+
+Investment duration
+
+🔊 AI speaks back with clear, structured advice
 
 ✨ Features
 
@@ -48,11 +66,15 @@ AI speaks back with clear, structured advice
 
 💬 Optional text input support
 
-🧠 Smart AI conversation (handles vague inputs)
+🧠 Smart AI conversation
+
+Handles vague inputs
+
+Asks clarifying questions
 
 🎯 Goal-based investment planning
 
-📊 Comparison of multiple investment assets:
+📊 Investment comparison across assets
 
 Mutual Funds
 
@@ -60,7 +82,7 @@ Stocks
 
 Gold & Silver
 
-Long / Short-term instruments
+Short-term & Long-term instruments
 
 ⚠️ Built-in investment risk disclaimer
 
@@ -97,11 +119,11 @@ AI & Voice
 
 Google Gemini API
 
-Speech-to-Text (User voice input)
+🎙️ Speech-to-Text (User voice input)
 
-Text-to-Speech (AI voice response)
+🔊 Text-to-Speech (AI voice response)
 
-Prompt Engineering for structured financial advice
+🧠 Prompt engineering for structured financial advice
 
 🔁 Complete Project Flow (Voice-to-Voice)
 1️⃣ Secure Login
@@ -122,7 +144,7 @@ Converts voice → text
 
 Detects missing information
 
-Asks follow-up questions like:
+Asks follow-up questions:
 
 Investment amount
 
@@ -130,7 +152,7 @@ Time duration
 
 Risk appetite
 
-Goal (house, wealth, retirement, etc.)
+Financial goal (house, wealth, retirement, etc.)
 
 4️⃣ Intelligent Data Extraction
 
@@ -144,7 +166,7 @@ Risk level
 
 Financial goal
 
-If data is incomplete → AI asks again (just like a human advisor)
+👉 If data is incomplete, AI asks again (like a human advisor)
 
 5️⃣ Investment Analysis & Comparison
 
@@ -164,7 +186,7 @@ Converts response → spoken voice
 
 Presents:
 
-Summary in clear language
+Clear summary
 
 Asset allocation
 
@@ -172,7 +194,7 @@ Risk explanation
 
 Disclaimer
 
-👉 User hears advice, not just reads it.
+👉 User hears advice, not just reads it
 
 🏗️ Architecture Overview
 User Voice Input
@@ -209,7 +231,7 @@ AI-Investment-Advisor/
 
 ⚙️ Environment Variables
 
-Create .env.local:
+Create a .env.local file:
 
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_key
 CLERK_SECRET_KEY=your_key
@@ -267,19 +289,19 @@ Protected API routes
 This application is not a registered financial advisor.
 All recommendations are for educational purposes only.
 Investments are subject to market risks.
-Consult a certified financial advisor before investing.
+Please consult a certified financial advisor before investing.
 
 🚀 Future Enhancements
 
-📈 Live market data
+📈 Live market data integration
 
 🧠 Memory-based AI personalization
 
 📊 Portfolio tracking
 
-🔊 Human-like conversational voice
+🔊 More human-like conversational voice
 
-📱 Mobile-first PWA
+📱 Mobile-first PWA support
 
 👨‍💻 Author
 
