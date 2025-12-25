@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ConvexClientProvider } from "./ConvexClientProvider";
 import {
   ClerkProvider,
   SignInButton,
@@ -8,7 +9,8 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import AIProvider from "./providers"
+import "./globals.css"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -55,10 +57,27 @@ export default function RootLayout({
               <UserButton afterSignOutUrl="/" />
             </SignedIn>
           </header>
-
-          {children}
+<ConvexClientProvider><AIProvider>{children}</AIProvider></ConvexClientProvider>
         </body>
       </html>
     </ClerkProvider>
   );
 }
+
+// import { ClerkProvider } from "@clerk/nextjs"
+// import Providers from "./providers"
+// import "./globals.css"
+
+// export default function RootLayout({ children }: { children: React.ReactNode }) {
+//   return (
+//     <ClerkProvider>
+//       <html lang="en">
+//         <body>
+//           <Providers>
+//             {children}
+//           </Providers>
+//         </body>
+//       </html>
+//     </ClerkProvider>
+//   )
+// }
