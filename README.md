@@ -120,7 +120,8 @@ Copy code
 - Investment amount
 - Duration
 - Risk appetite
-- Financial goal  
+- Financial goal
+
 4️⃣ AI compares assets and strategies  
 5️⃣ AI speaks back:
 - Clear summary
@@ -128,24 +129,21 @@ Copy code
 - Risk explanation
 - Disclaimer  
 
----
 
 ### ⚙️ Environment Variables
 
--Create a `.env.local` file:
-
+-Create a .env file:
 -NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_key
 -CLERK_SECRET_KEY=your_key
 -GOOGLE_GEMINI_API_KEY=your_key
 -▶️ Run Locally
-
 -git clone https://github.com/Abhishek-3191/AI-Investment-Advisor.git
 -cd AI-Investment-Advisor
 -npm install
 -npm run dev
 -Open 👉 http://localhost:3000
 
----
+
 
 ### 🚧 Challenges & Solutions
 🔴 Voice Accuracy
@@ -165,15 +163,11 @@ Problem: Open AI misuse and unauthorized access
 Solution: Clerk authentication and protected API routes
 
 
----
-
 ### ⚠️ Disclaimer
 This application is not a registered financial advisor.
 All recommendations are for educational purposes only.
 Investments are subject to market risks.
 Please consult a certified financial advisor before investing.
-
---
 
 
 ### 🚀 Future Enhancements
@@ -184,7 +178,6 @@ Please consult a certified financial advisor before investing.
 📱 Mobile-first PWA support
 
 
---
 
 
 ### 📌 Resume-Ready Description
