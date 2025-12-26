@@ -129,21 +129,21 @@ Copy code
 - Risk explanation
 - Disclaimer  
 
+---
 
 ### ⚙️ Environment Variables
+- Create a .env file:
+- NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_key
+- CLERK_SECRET_KEY=your_key
+- GOOGLE_GEMINI_API_KEY=your_key
+- ▶️ Run Locally
+- git clone https://github.com/Abhishek-3191/AI-Investment-Advisor.git
+- cd AI-Investment-Advisor
+- npm install
+- npm run dev
+- Open 👉 http://localhost:3000
 
--Create a .env file:
--NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_key
--CLERK_SECRET_KEY=your_key
--GOOGLE_GEMINI_API_KEY=your_key
--▶️ Run Locally
--git clone https://github.com/Abhishek-3191/AI-Investment-Advisor.git
--cd AI-Investment-Advisor
--npm install
--npm run dev
--Open 👉 http://localhost:3000
-
-
+---
 
 ### 🚧 Challenges & Solutions
 🔴 Voice Accuracy
@@ -162,6 +162,7 @@ Solution: Enforced structured JSON schema with controlled frontend rendering
 Problem: Open AI misuse and unauthorized access
 Solution: Clerk authentication and protected API routes
 
+---
 
 ### ⚠️ Disclaimer
 This application is not a registered financial advisor.
@@ -169,6 +170,7 @@ All recommendations are for educational purposes only.
 Investments are subject to market risks.
 Please consult a certified financial advisor before investing.
 
+---
 
 ### 🚀 Future Enhancements
 📈 Live market data integration
@@ -177,11 +179,12 @@ Please consult a certified financial advisor before investing.
 🔊 More human-like conversational voice
 📱 Mobile-first PWA support
 
-
-
+---
 
 ### 📌 Resume-Ready Description
 Built a full voice-to-voice AI Investment Advisor using Next.js, Gemini AI, and Clerk, capable of understanding financial goals, risk appetite, and delivering personalized investment recommendations via real-time conversational AI.
+
+---
 
 ### 👨‍💻 Author
 Abhishek Srivastava
