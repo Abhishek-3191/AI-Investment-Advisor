@@ -93,22 +93,20 @@ This app behaves like a **real AI financial advisor**:
 
 ## 🔁 Complete Voice-to-Voice Flow
 
-User Voice Input
-↓
-Speech-to-Text
-↓
-Authenticated API (Clerk)
-↓
-Gemini AI (Investment Logic)
-↓
-Structured JSON Output
-↓
-Text-to-Speech
-↓
-AI Voice Response
+- User Voice Input
+- ↓
+- Speech-to-Text
+- ↓
+- Authenticated API (Clerk)
+- ↓
+- Gemini AI (Investment Logic)
+- ↓
+- Structured JSON Output
+- ↓
+- Text-to-Speech
+- ↓
+- AI Voice Response
 
-yaml
-Copy code
 
 ---
 
@@ -165,24 +163,24 @@ Solution: Clerk authentication and protected API routes
 ---
 
 ### ⚠️ Disclaimer
-This application is not a registered financial advisor.
-All recommendations are for educational purposes only.
-Investments are subject to market risks.
-Please consult a certified financial advisor before investing.
+- This application is not a registered financial advisor.
+- All recommendations are for educational purposes only.
+- Investments are subject to market risks.
+- Please consult a certified financial advisor before investing.
 
 ---
 
 ### 🚀 Future Enhancements
-📈 Live market data integration
-🧠 Long-term AI memory & personalization
-📊 Portfolio tracking dashboard
-🔊 More human-like conversational voice
-📱 Mobile-first PWA support
+- 📈 Live market data integration
+- 🧠 Long-term AI memory & personalization
+- 📊 Portfolio tracking dashboard
+- 🔊 More human-like conversational voice
+- 📱 Mobile-first PWA support
 
 ---
 
 ### 📌 Resume-Ready Description
-Built a full voice-to-voice AI Investment Advisor using Next.js, Gemini AI, and Clerk, capable of understanding financial goals, risk appetite, and delivering personalized investment recommendations via real-time conversational AI.
+- Built a full voice-to-voice AI Investment Advisor using Next.js, Gemini AI, and Clerk, capable of understanding financial goals, risk appetite, and delivering personalized investment recommendations via real-time conversational AI.
 
 ---
 
