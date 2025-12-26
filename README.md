@@ -130,29 +130,7 @@ Copy code
 
 ---
 
-## 📂 Project Structure
-
--AI-Investment-Advisor/
-  -├── app/
--│ ├── api/chat/route.ts
--│ ├── page.tsx
-- └── layout.tsx
--├── components/
--│ ├── VoiceInput.tsx
--│ ├── VoiceOutput.tsx
--│ └── ChatUI.tsx
--├── convex/
--│ └── functions.ts
--├── lib/
--│ └── gemini.ts
--├── public/
--├── .env.local
--└── README.md
-
-
----
-
-## ⚙️ Environment Variables
+### ⚙️ Environment Variables
 
 -Create a `.env.local` file:
 
@@ -189,7 +167,7 @@ Solution: Clerk authentication and protected API routes
 
 ---
 
-⚠️ Disclaimer
+### ⚠️ Disclaimer
 This application is not a registered financial advisor.
 All recommendations are for educational purposes only.
 Investments are subject to market risks.
@@ -198,7 +176,7 @@ Please consult a certified financial advisor before investing.
 --
 
 
-🚀 Future Enhancements
+### 🚀 Future Enhancements
 📈 Live market data integration
 🧠 Long-term AI memory & personalization
 📊 Portfolio tracking dashboard
@@ -209,9 +187,9 @@ Please consult a certified financial advisor before investing.
 --
 
 
-📌 Resume-Ready Description
+### 📌 Resume-Ready Description
 Built a full voice-to-voice AI Investment Advisor using Next.js, Gemini AI, and Clerk, capable of understanding financial goals, risk appetite, and delivering personalized investment recommendations via real-time conversational AI.
 
-👨‍💻 Author
+### 👨‍💻 Author
 Abhishek Srivastava
 🔗 https://github.com/Abhishek-3191
