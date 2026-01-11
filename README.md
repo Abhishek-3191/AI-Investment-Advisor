@@ -33,21 +33,21 @@
 -------------------------------------------------------------------------------
 
 ### 🏗️ High-Level Architecture
--Client (Voice / Web)
+Client (Voice / Web)
 -        |
--Speech-to-Text
+Speech-to-Text
 -        |
--Authentication Layer (Clerk)
+Authentication Layer (Clerk)
 -        |
--API Layer (Next.js)
+API Layer (Next.js)
 -        |
--AI Reasoning Engine (Gemini)
+AI Reasoning Engine (Gemini)
 -       |
--Structured JSON Output
+Structured JSON Output
 -        |
--Text-to-Speech
+Text-to-Speech
 -        |
--Voice Response to User
+Voice Response to User
 
 
 - Design focus: low-latency interaction, controlled AI output, and secure access.
