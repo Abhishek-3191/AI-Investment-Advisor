@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import {
   ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
+  
 } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import AIProvider from "./providers"
@@ -38,46 +34,10 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <header className="flex justify-end items-center p-4 gap-4 h-16">
-            <SignedOut>
-              <SignInButton mode="redirect" forceRedirectUrl="/chat">
-                <button className="text-sm font-medium">
-                  Sign In
-                </button>
-              </SignInButton>
-
-              <SignUpButton mode="redirect" forceRedirectUrl="/chat">
-                <button className="bg-[#6c47ff] text-white rounded-full font-medium text-sm h-10 px-5">
-                  Sign Up
-                </button>
-              </SignUpButton>
-            </SignedOut>
-
-            <SignedIn>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
-          </header>
-<ConvexClientProvider><AIProvider>{children}</AIProvider></ConvexClientProvider>
+        <ConvexClientProvider><AIProvider>{children}</AIProvider></ConvexClientProvider>
         </body>
       </html>
     </ClerkProvider>
   );
 }
 
-// import { ClerkProvider } from "@clerk/nextjs"
-// import Providers from "./providers"
-// import "./globals.css"
-
-// export default function RootLayout({ children }: { children: React.ReactNode }) {
-//   return (
-//     <ClerkProvider>
-//       <html lang="en">
-//         <body>
-//           <Providers>
-//             {children}
-//           </Providers>
-//         </body>
-//       </html>
-//     </ClerkProvider>
-//   )
-// }

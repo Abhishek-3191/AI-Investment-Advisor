@@ -59,7 +59,7 @@ async function getMarketData() {
       "https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=1mo&interval=1d"
     )
     const trendData = await trendRes.json()
-
+    console.log("trendData",trendData)
     const prices =
       trendData?.chart?.result?.[0]?.indicators?.quote?.[0]?.close || []
 
@@ -83,6 +83,7 @@ async function getMarketData() {
       const match = text.match(/"pe":\s*([\d.]+)/)
       if (match) {
         niftyPE = parseFloat(match[1])
+        console.log("niftyPE",niftyPE);
       }
     } catch (e) {
       console.log("PE fetch failed, using fallback")
@@ -96,6 +97,7 @@ try {
   const res = await fetch("https://api.worldbank.org/v2/country/IN/indicator/FP.CPI.TOTL.ZG?format=json")
   const data = await res.json()
   inflation = data?.[1]?.[0]?.value || 6.5
+  console.log("inflation",inflation)
 } catch {
   console.log("Inflation fallback used")
 }
@@ -103,10 +105,12 @@ try {
 
     /* ---------------- FINAL RETURN ---------------- */
     return {
+      niftyPoint: last,
       niftyPE,
       inflation,
       interestRate,
       trend,
+       fetchedAt: new Date().toISOString(),
     }
 
   } catch (e) {
@@ -136,7 +140,7 @@ function getMarketSignals(data: any) {
       data.inflation > 6 ? "high" : "normal",
 
     rateRegime:
-      data.interestRate > 6.5 ? "tight" : "easy",
+      data.interestRate >= 6.5 ? "tight" : "easy",
 
     trend: data.trend, // bullish / bearish / neutral
   }
@@ -189,51 +193,176 @@ function decisionEngine(profile: UserProfile, signals: any): DecisionResult {
 
   /* ---------------- STEP 1: ASSET UNIVERSE ---------------- */
 
-  const ASSETS = [
-    { name: "Nifty 50", type: "equity", base: 1.0 },
-    { name: "Flexi Cap Fund", type: "equity", base: 1.1 },
-    { name: "Midcap Fund", type: "equity", base: 1.2 },
-    { name: "Small Cap Fund", type: "equity", base: 1.3 },
-    { name: "Banking Sector Fund", type: "equity", base: 1.15 },
+ const ASSETS = [
+  {
+    name: "Nifty 50",
+    category: "equity",
+    riskLevel: "moderate",
+    expectedReturn: 12,
+    base: 1.0,
+  },
+  {
+    name: "Flexi Cap Fund",
+    category: "equity",
+    riskLevel: "moderate",
+    expectedReturn: 11,
+    base: 1.1,
+  },
+  {
+    name: "Midcap Fund",
+    category: "equity",
+    riskLevel: "high",
+    expectedReturn: 13,
+    base: 1.2,
+  },
+  {
+    name: "Small Cap Fund",
+    category: "equity",
+    riskLevel: "high",
+    expectedReturn: 14,
+    base: 1.3,
+  },
+  {
+    name: "Banking Sector Fund",
+    category: "equity",
+    riskLevel: "high",
+    expectedReturn: 12,
+    base: 1.15,
+  },
 
-    { name: "US Index Fund", type: "international", base: 1.0 },
+  {
+    name: "US Index Fund",
+    category: "international",
+    riskLevel: "moderate",
+    expectedReturn: 10,
+    base: 1.0,
+  },
 
-    { name: "Gold ETF", type: "gold", base: 1.2 },
-    { name: "Silver ETF", type: "gold", base: 1.05 },
+  {
+    name: "Gold ETF",
+    category: "gold",
+    riskLevel: "moderate",
+    expectedReturn: 9,
+    base: 1.0,
+  },
+  {
+    name: "Silver ETF",
+    category: "gold",
+    riskLevel: "high",
+    expectedReturn: 9,
+    base: 1.1,
+  },
 
-    { name: "Corporate Bond Fund", type: "debt", base: 1.0 },
-    { name: "Liquid Fund", type: "debt", base: 0.9 },
-  ]
+  {
+    name: "Corporate Bond Fund",
+    category: "debt",
+    riskLevel: "low",
+    expectedReturn: 7,
+    base: 1.0,
+  },
+  {
+    name: "Liquid Fund",
+    category: "debt",
+    riskLevel: "low",
+    expectedReturn: 7,
+    base: 0.9,
+  },
+]
 
   
 
   /* ---------------- STEP 2: SCORING ---------------- */
  const filteredAssets = ASSETS.filter(a => {
-  if (risk === "low" && (a.name.includes("Small") || a.name.includes("Midcap") || a.name.includes("Sector"))) return false
-  if (duration <= 3 && (a.name.includes("Small") || a.name.includes("Midcap"))) return false
+  // Low-risk investors should avoid high-risk assets
+  if (risk === "low" && a.riskLevel === "high") {
+    return false
+  }
+
+  // Short investment horizons should avoid high-risk assets
+  if (duration <= 3 && a.riskLevel === "high") {
+    return false
+  }
+
   return true
 })
 
   const scored = filteredAssets.map(a => {
-    let score = a.base
+  let score = a.base
 
-    // 📈 Market trend
-    if (signals.trend === "bullish" && a.type === "equity") score += 0.6
-    if (signals.trend === "bearish" && a.type === "debt") score += 0.6
+  // Expected return
+  score += (a.expectedReturn - 9) * 0.1
 
-    // 🪙 Inflation
-    if (signals.inflationRegime === "high" && a.type === "gold") score += 0.7
+  // Market conditions
+  if (signals.trend === "bullish" && a.category === "equity") {
+    score += 0.6
+  }
 
-    // 🎯 Risk preference
-    if (risk === "high" && a.name.includes("Small")) score += 0.8
-    if (risk === "low" && a.type === "debt") score += 0.8
+  if (signals.trend === "bearish" && a.category === "debt") {
+    score += 0.6
+  }
 
-    // ⏳ Duration
-    if (duration > 7 && a.type === "equity") score += 0.5
-    if (duration <= 3 && a.type === "debt") score += 0.7
+  if (signals.inflationRegime === "high" && a.category === "gold") {
+    score += 0.7
+  }
 
-    return { ...a, score }
-  })
+  // Risk preference
+  if (risk === "high") {
+    if (a.riskLevel === "high") score += 0.5
+    if (a.riskLevel === "moderate") score += 0.3
+  }
+
+  if (risk === "medium") {
+    if (a.riskLevel === "moderate") score += 0.5
+    if (a.riskLevel === "high") score += 0.2
+    if (a.riskLevel === "low") score += 0.1
+  }
+
+  if (risk === "low") {
+    if (a.riskLevel === "low") score += 0.6
+    if (a.riskLevel === "moderate") score += 0.2
+  }
+
+  // Investment horizon
+if (duration < 1) {
+  // Very short horizon: prioritize capital stability
+  if (a.category === "debt") score += 1.0
+  if (a.category === "gold") score += 0.3
+  if (a.category === "equity") score -= 0.8
+}
+
+else if (duration < 3) {
+  // Short horizon: defensive allocation
+  if (a.category === "debt") score += 0.7
+  if (a.category === "gold") score += 0.3
+  if (a.category === "equity") score -= 0.4
+}
+
+else if (duration <= 5) {
+  // Medium horizon: balanced growth + stability
+  if (a.category === "equity") score += 0.2
+  if (a.category === "debt") score += 0.2
+  if (a.category === "gold") score += 0.2
+}
+
+else if (duration <= 10) {
+  // Long horizon: greater ability to tolerate equity volatility
+  if (a.category === "equity") score += 0.6
+  if (a.category === "gold") score += 0.3
+  if (a.category === "debt") score += 0.1
+}
+
+else {
+  // Very long horizon: prioritize long-term growth
+  if (a.category === "equity") score += 0.8
+  if (a.category === "gold") score += 0.3
+  if (a.category === "debt") score += 0.0
+}
+
+  return {
+    ...a,
+    score,
+  }
+})
 
   /* ---------------- STEP 3: SORT ---------------- */
 
@@ -245,17 +374,124 @@ function decisionEngine(profile: UserProfile, signals: any): DecisionResult {
   if (risk === "low") topN = 4
   if (risk === "high") topN = 6
 
-  const selected = scored.slice(0, topN)
+  let equityTarget = 0
+  let debtTarget = 0
+  let goldTarget = 0
+
+  // Portfolio structure based on risk + investment horizon
+if (duration < 1) {
+  // Very short horizon
+  equityTarget = risk === "high" ? 15 : 5
+  debtTarget = risk === "high" ? 70 : 85
+  goldTarget = 15
+}
+
+else if (duration < 3) {
+  // Short horizon
+  equityTarget = risk === "high" ? 30 : risk === "medium" ? 20 : 10
+  debtTarget = risk === "high" ? 50 : risk === "medium" ? 60 : 75
+  goldTarget = 20
+}
+
+else if (duration <= 5) {
+  // Medium horizon
+  equityTarget = risk === "high" ? 70 : risk === "medium" ? 55 : 30
+  debtTarget = risk === "high" ? 15 : risk === "medium" ? 30 : 50
+  goldTarget = 15
+}
+
+else if (duration <= 10) {
+  // Long horizon
+  equityTarget = risk === "high" ? 80 : risk === "medium" ? 65 : 45
+  debtTarget = risk === "high" ? 10 : risk === "medium" ? 20 : 40
+  goldTarget = 10
+}
+
+else {
+  // Very long horizon
+  equityTarget = risk === "high" ? 85 : risk === "medium" ? 70 : 50
+  debtTarget = risk === "high" ? 5 : risk === "medium" ? 15 : 35
+  goldTarget = 10
+}
+
+  // const selected = scored.slice(0, topN)
 
   /* ---------------- STEP 5: NORMALIZE ---------------- */
 
-  const totalScore = selected.reduce((sum, a) => sum + a.score, 0)
+  // const totalScore = selected.reduce((sum, a) => sum + a.score, 0)
 
-  const allocation = selected.map(a => ({
-    asset: a.name,
-    percent: Math.round((a.score / totalScore) * 100),
+  // const allocation = selected.map(a => ({
+  //   asset: a.name,
+  //   percent: Math.round((a.score / totalScore) * 100),
+  // }))
+
+  // Select the best assets from each category
+const equityAssets = scored
+  .filter(a => a.category === "equity")
+  .sort((a, b) => b.score - a.score)
+
+const debtAssets = scored
+  .filter(a => a.category === "debt")
+  .sort((a, b) => b.score - a.score)
+
+const goldAssets = scored
+  .filter(a => a.category === "gold")
+  .sort((a, b) => b.score - a.score)
+
+const selected = [
+  ...equityAssets.slice(0, 2),
+  ...debtAssets.slice(0, 2),
+  ...goldAssets.slice(0, 1),
+]
+
+const selectedEquity = equityAssets.slice(0, 2)
+const selectedDebt = debtAssets.slice(0, 2)
+const selectedGold = goldAssets.slice(0, 1)
+
+const allocateByScore = (
+  assets: typeof scored,
+  targetPercent: number
+) => {
+  if (assets.length === 0 || targetPercent === 0) {
+    return []
+  }
+
+  const totalScore = assets.reduce(
+    (sum, asset) => sum + asset.score,
+    0
+  )
+
+  return assets.map(asset => ({
+    asset: asset.name,
+    percent: Math.round(
+      (asset.score / totalScore) * targetPercent
+    ),
   }))
+}
 
+const rawAllocation = [
+  ...allocateByScore(selectedEquity, equityTarget),
+  ...allocateByScore(selectedDebt, debtTarget),
+  ...allocateByScore(selectedGold, goldTarget),
+]
+
+const allocationTotal = rawAllocation.reduce(
+  (sum, item) => sum + item.percent,
+  0
+)
+
+const difference = 100 - allocationTotal
+
+const allocation = rawAllocation.map((item, index) => {
+  if (index === 0) {
+    return {
+      ...item,
+      percent: item.percent + difference,
+    }
+  }
+
+  return item
+})
   return {
     type: "ADVICE",
     context: "AI-selected portfolio using scoring + market signals",
@@ -411,8 +647,6 @@ export async function POST(req: Request) {
 
 /* 3️⃣ DECISION ENGINE new version */
 
-// const profile = extractUserProfile(message)
-// const decision = decisionEngine(profile)
 
 const profile = extractUserProfile(message)
 
@@ -442,12 +676,6 @@ const returns = getExpectedReturns(signals)
 const projections = decision.allocation.map(asset => {
   const invested = (profile.amount! * asset.percent) / 100
 
-  // let rate =
-  //   asset.asset === "Nifty 50"
-  //     ? returns.equity
-  //     : asset.asset === "Gold ETF"
-  //     ? returns.gold
-  //     : returns.debt
 
   let rate
 
@@ -513,7 +741,7 @@ let aiReply =
   "Sorry, I couldn't understand that."
 
 console.log("Raw Response:", aiReply)
-// console.log("Final Allocation:", allocation)
+
 
 /* 🔥 STEP 1: Remove markdown */
 aiReply = aiReply
