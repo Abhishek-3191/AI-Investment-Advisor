@@ -94,9 +94,11 @@ export default function ChatClient({
   /* ---------- GREETING ---------- */
 
   useEffect(() => {
-    const greeting = `Hello ${userName}. I am your AI investment assistant.
-I provide educational data based insights.
-Please tell me your investment amount, duration and risk preference.`
+    const greeting = `Hello ${userName}. I’m your AI Investment Assistant.
+
+I use educational, data-driven insights to help you understand your investment options.
+
+Tell me what you’re hoping to achieve with your money, and we’ll figure out the rest together.`
 
     setMessages([
       {
