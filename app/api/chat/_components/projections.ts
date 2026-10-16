@@ -189,11 +189,3 @@ export function createProjections(
     }
   )
 }
-
-export function getAssetMetadata(
-  assetName: string
-) {
-  return ASSETS.find(
-    asset => asset.name === assetName
-  )
-}
