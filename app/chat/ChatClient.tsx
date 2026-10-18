@@ -708,17 +708,12 @@ Tell me what you’re hoping to achieve with your money, and we’ll figure out 
                     <span className="text-[9px] font-medium text-black/50">
                       AI is speaking...
                     </span>
-
                   </div>
                 )}
-
               </div>
             )}
-
             {/* Command bar */}
-
             <div className="group flex items-center gap-2 rounded-[25px] border border-black/[0.08] bg-white/90 p-2 pl-5 shadow-[0_15px_50px_rgba(0,0,0,0.08)] backdrop-blur-xl transition-all focus-within:border-black/15 focus-within:shadow-[0_18px_60px_rgba(0,0,0,0.11)]">
-
               <input
                 className="min-w-0 flex-1 bg-transparent py-2 text-[12px] text-black outline-none placeholder:text-black/30 sm:text-[13px]"
                 placeholder="Tell me about your goal, amount and risk..."
@@ -731,9 +726,7 @@ Tell me what you’re hoping to achieve with your money, and we’ll figure out 
                 }}
                 disabled={loading}
               />
-
               {/* Mic */}
-
               <button
                 onClick={startListening}
                 disabled={loading}
@@ -746,9 +739,7 @@ Tell me what you’re hoping to achieve with your money, and we’ll figure out 
               >
                 <Mic className="h-4 w-4" />
               </button>
-
               {/* Send */}
-
               <button
                 onClick={() => handleSend()}
                 disabled={loading || !input.trim()}
@@ -757,32 +748,22 @@ Tell me what you’re hoping to achieve with your money, and we’ll figure out 
               >
                 <Send className="h-3.5 w-3.5" />
               </button>
-
             </div>
-
             <p className="mt-2 text-center text-[8px] text-black/30">
               AI-generated educational insights · Not financial advice
             </p>
-
           </div>
-
         </div>
-
       </section>
-
     </main>
   )
 }
-
 /* ========================================================= */
 /* RISK BADGE */
 /* ========================================================= */
-
 function RiskBadge({ risk }: { risk: string }) {
   const normalized = risk.toLowerCase()
-
   let label = risk
-
   if (normalized.includes("high")) {
     label = "High risk"
   } else if (normalized.includes("moderate")) {
@@ -790,7 +771,6 @@ function RiskBadge({ risk }: { risk: string }) {
   } else if (normalized.includes("low")) {
     label = "Low risk"
   }
-
   return (
     <span className="inline-flex rounded-full bg-[#f3f3ee] px-2.5 py-1 text-[9px] font-medium text-black/55">
       {label}
@@ -805,9 +785,7 @@ function RiskBadge({ risk }: { risk: string }) {
 function Wave({ type }: { type: "user" | "ai" }) {
   return (
     <div className="flex h-4 items-center gap-[3px]">
-
       {[1, 2, 3, 4, 5].map(i => (
-
         <span
           key={i}
           className={`w-[3px] rounded-full animate-wave ${
@@ -834,39 +812,24 @@ function Wave({ type }: { type: "user" | "ai" }) {
 function LoadingBubble() {
   return (
     <div className="flex w-full justify-start">
-
       <div className="w-full max-w-[850px]">
-
         <div className="mb-2 flex items-center gap-2">
-
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#111] text-[#c7ff4d]">
             <Bot className="h-3.5 w-3.5" />
           </div>
-
           <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-black/40">
             AI Advisor
           </span>
-
         </div>
-
         <div className="inline-flex items-center gap-3 rounded-[20px] border border-black/[0.06] bg-white px-5 py-3.5 text-[11px] text-black/45 shadow-sm">
-
           <span>Thinking</span>
-
           <span className="flex gap-1">
-
             <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-black/40 [animation-delay:0ms]" />
-
             <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-black/40 [animation-delay:150ms]" />
-
             <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-black/40 [animation-delay:300ms]" />
-
           </span>
-
         </div>
-
       </div>
-
     </div>
   )
 }

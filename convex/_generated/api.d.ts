@@ -10,6 +10,7 @@
 
 import type * as chats from "../chats.js";
 import type * as investmentProfiles from "../investmentProfiles.js";
+import type * as planningSessions from "../planningSessions.js";
 import type * as users from "../users.js";
 
 import type {
@@ -21,6 +22,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   chats: typeof chats;
   investmentProfiles: typeof investmentProfiles;
+  planningSessions: typeof planningSessions;
   users: typeof users;
 }>;
 
