@@ -1,6 +1,7 @@
 ### 🤖 AI Investment Advisor — Full Voice-to-Voice GenAI System
 
 - A production-oriented, voice-enabled AI Investment Advisor that listens to users, understands financial goals, and responds with structured, goal-based investment guidance using real-time conversational AI.
+<img width="1375" height="913" alt="image" src="https://github.com/user-attachments/assets/da6b4581-1bf6-45fc-a798-299045449326" />
 
 ### 🔗 GitHub: https://github.com/Abhishek-3191/AI-Investment-Advisor
 
