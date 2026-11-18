@@ -1,30 +1,17 @@
 ### 🤖 AI Investment Advisor — Full Voice-to-Voice GenAI System
 
-- A production-oriented, voice-enabled AI Investment Advisor that listens to users, understands financial goals, and responds with structured, goal-based investment guidance using real-time conversational AI.
+
 <img width="1375" height="913" alt="image" src="https://github.com/user-attachments/assets/da6b4581-1bf6-45fc-a798-299045449326" />
 
 ### 🔗 GitHub: https://github.com/Abhishek-3191/AI-Investment-Advisor
 
 ### 🎥 Demo (Loom): https://www.loom.com/share/1ecfc9239cff4e03bcc524c8f4bff176
 
-# 🤖 AI Investment Advisor
-
-### A Voice-First, Conversational Generative AI Investment Assistant
-
-
-
-
-
-\
-
-
 **AI Investment Advisor** is a voice-first Generative AI application that helps users explore investment strategies through natural conversations.
 
 Built with Next.js, TypeScript, and Google's Gemini API, the application understands financial goals expressed in natural language, identifies vague or incomplete requirements, asks contextual follow-up questions, and generates structured, goal-based investment guidance.
 
 Unlike a basic LLM chatbot, the application combines conversational AI with a deterministic investment analysis layer, structured data validation, user profiles, planning sessions, and market-data caching.
-
-\<p align="center">   \<a href="[https://www.loom.com/share/1ecfc9239cff4e03bcc524c8f4bff176](https://www.loom.com/share/1ecfc9239cff4e03bcc524c8f4bff176)">\<b>🎥 Watch Live Demo\</b>\</a>   &nbsp; | &nbsp;   \<a href="[https://github.com/Abhishek-3191/AI-Investment-Advisor](https://github.com/Abhishek-3191/AI-Investment-Advisor)">\<b>💻 Explore Source Code\</b>\</a> \</p>
 
 ---
 
